@@ -3,6 +3,7 @@
   margin: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  scroll-padding: 78px;
 }
 
 :root {
@@ -150,7 +151,7 @@ i {
   align-items: center;
   position: fixed;
   top: 15px;
-  z-index: 1;
+  z-index: 2;
   transition: all 0.3s ease;
 }
 
@@ -449,7 +450,7 @@ i {
 
 /* !BOOK A TABLE STYLES */
 .book-section {
-  padding: calc(var(--spacing-xl) * 2) 0;
+  padding: var(--spacing-xl) 0;
   background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url('../pics/background-2.jpg');
   background-position: center;
@@ -497,7 +498,7 @@ i {
 
 /* ! TESTIMONIALS STYLES */
 .testimonials-section {
-  padding: calc(var(--spacing-xl) * 2) 0;
+  padding: var(--spacing-lg) 0;
   text-align: center;
   color: var(--text-dark);
 }
@@ -829,6 +830,12 @@ footer {
   .grid-wrapper {
     grid-template-columns: repeat(1, 500px);
     justify-content: center;
+  }
+
+  /* ABOUT */
+  .about-section .col-left .about-img {
+    width: 350px;
+    height: 350px;
   }
 
   /* TESTIMONIALS */
