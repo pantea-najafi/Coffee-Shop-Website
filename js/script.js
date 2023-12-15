@@ -8,7 +8,9 @@ const mobileCloseIcon = document.getElementById('mobile-close');
 const hamburger = document.getElementById('hamburger');
 const navCloseIcon = document.getElementById('nav-close-icon');
 const navMenu = document.getElementById('nav-menu');
+const sections = document.querySelectorAll('section[id]');
 const overlay = document.getElementById('overlay');
+const backToTopButton = document.getElementById('back-to-top');
 
 // !sticky nav
 function scrolledNav() {
@@ -16,6 +18,15 @@ function scrolledNav() {
     navbar.classList.add('active');
   } else {
     navbar.classList.remove('active');
+  }
+}
+
+// !showing back to top button on scroll
+function showBackToTopButton() {
+  if (window.scrollY > 0) {
+    backToTopButton.classList.add('show-back-to-top');
+  } else {
+    backToTopButton.classList.remove('show-back-to-top');
   }
 }
 
@@ -42,11 +53,33 @@ function closeMobileSearch() {
 function showMenu() {
   navMenu.classList.add('fixed');
   overlay.classList.add('open');
+  console.log('open');
 }
 
 function closeMenu() {
   navMenu.classList.remove('fixed');
   overlay.classList.remove('open');
+}
+
+// ! changing active link on scroll
+function activeLink() {
+  const scrollY = window.pageYOffset;
+
+  sections.forEach((section) => {
+    const sectionHeight = section.offsetHeight;
+    const sectionTop = section.offsetTop - 110;
+    const sectionID = section.getAttribute('id');
+
+    if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+      document
+        .querySelector('.nav-menu li a[href*=' + sectionID + ']')
+        .classList.add('active');
+    } else {
+      document
+        .querySelector('.nav-menu li a[href*=' + sectionID + ']')
+        .classList.remove('active');
+    }
+  });
 }
 
 // ! creating menu for home page
@@ -93,6 +126,8 @@ function init() {
   hamburger.addEventListener('click', showMenu);
   navCloseIcon.addEventListener('click', closeMenu);
   window.addEventListener('scroll', scrolledNav);
+  window.addEventListener('scroll', activeLink);
+  window.addEventListener('scroll', showBackToTopButton);
 }
 
 document.addEventListener('DOMContentLoaded', createList);
